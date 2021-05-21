@@ -19,14 +19,14 @@ example: ./laserTank 20 10 1 1 s 5 4 w
 */
 
 /* calling functions from other script*/
-void graph(char** array, int row, int col, int px, int py, char direc, int ex, int ey, char edirec, char** mirror, int max_size, Linkedlist* list);
+void graph(char** array, int row, int col, int px, int py, char direc, int ex, int ey, char edirec, char** mirror, int max_size, LinkedList* list);
 int playershoot(char** array, int row, int col, int px, int py, char direc, int ex, int ey, char edirec, char laserdirec, char** mirror, int max_size, LinkedList* list);
 int movementchecker(int playerx, int playery, int enemyx, int enemyy, char direction, int row, int col);
 int movementy(int playery, int row, char direct);
 int movementx(int playerx, int col, char direct);
 int check(char direction);
 int count(char *input);
-int enemyshoot(char** array, int row, int col, int px, int py, char direc, int ex, int ey, char edirec, char elaserdirec, char** mirror, int max_size, LinkedList* list);
+int enemyshoot(char** array, int row, int col, int px, int py, char direc, int ex, int ey, char edirec, char elaserdirec, int max_size, LinkedList* list);
 
 
 
@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 	list = createLinkedList();
 	
 
-	if (argc != 3)
+	if (argc != 2)
 	printf("Not enough arguements!");
 	else
 	{
@@ -130,7 +130,7 @@ int main(int argc, char *argv[])
 		/* if enemy direction is looking upward and player is above the enemy and at the same column then it will shoot
 		if enemy direction is looking downward and player is below the enemy and at the same column then it will shoot*/
 			char elaserdirec = '|'; 
-			exit = enemyshoot(array, row, col, py, px, direction, ex, ey, edirection, elaserdirec, mirror, max_size, LinkedList* list));
+			exit = enemyshoot(array, row, col, py, px, direction, ex, ey, edirection, elaserdirec, max_size, list);
 			/*takes the return value from enemyshoot function and if enemyshoot equal 1 then end the loop*/
 
 		}
@@ -139,7 +139,7 @@ int main(int argc, char *argv[])
 		if enemy direction is looking left and player is on the left of the enemy and at the same row then it will shoot*/
 		{
 			char elaserdirec = '-';
-			exit = enemyshoot(array, row, col, py, px, direction, ex, ey, edirection, elaserdirec, mirror, max_size, LinkedList* list));
+			exit = enemyshoot(array, row, col, py, px, direction, ex, ey, edirection, elaserdirec, max_size, list);
 			/*takes the return value from enemyshoot function and if enemyshoot equal 1 then end the loop*/
 
 		}
@@ -149,7 +149,7 @@ int main(int argc, char *argv[])
 		{
 			system("clear");
 			hold = direction; /*this allow the player to rotate directions without moving*/
-			graph(array, row, col, py, px, direction, ex, ey, edirection, mirror, max_size, LinkedList* list)); /* printing the graph */
+			graph(array, row, col, py, px, direction, ex, ey, edirection, mirror, max_size, list); /* printing the graph */
 			
 			printf("w to walk up \n");
 			printf("s to walk down \n"); /*instruction*/
@@ -178,7 +178,7 @@ int main(int argc, char *argv[])
 			}
 			if (input [0] == 'l')
 			{
-				DumpToFile(&list, filename);
+				DumpToFile(list, "log.txt");
 			}
 		
 			else if (input[0] == 'f') /*determine the direction of the laser shot by player*/
@@ -188,14 +188,14 @@ int main(int argc, char *argv[])
 
 					char laserdirec = '-';
 					
-					exit = playershoot(array, row, col, py, px, direction, ex, ey, edirection, laserdirec, mirror, max_size, LinkedList* list));
+					exit = playershoot(array, row, col, py, px, direction, ex, ey, edirection, laserdirec, mirror, max_size, list);
 					/*takes the return value from playershoot and if 1 then the loop ends*/
 			
 				}
 				else if (direction == 'w' || direction == 's') /*if the input is up or down then shoot vertical lazer*/
 				{
 					char laserdirec = '|';
-					exit = playershoot(array, row, col, py, px, direction, ex, ey, edirection, laserdirec, mirror, max_size, LinkedList* list));
+					exit = playershoot(array, row, col, py, px, direction, ex, ey, edirection, laserdirec, mirror, max_size, list);
 					/*takes the return value from playershoot and if 1 then the loop ends*/
 				}
 			
@@ -220,7 +220,7 @@ int main(int argc, char *argv[])
 		free(array);
 		
 	}
-	DumpToFile(&list, filename);
-	freeLinkedList( &list, &CleanLogFunc )
+	DumpToFile(list, "log.txt");
+	freeLinkedList( list, &CleanLogFunc );
 	return 0;
 }
