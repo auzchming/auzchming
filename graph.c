@@ -7,10 +7,8 @@ char direction(char direction);
 void LogFrame( LinkedList* list, char** array, int row, int col);
 
 /*the main function to graph the map */
-void graph(char** array, int row, int col, int px, int py, char direc, int ex, int ey, char edirec, char** mirror, int max_size, Linkedlist* list)
+void graph(char** array, int row, int col, int px, int py, char direc, int ex, int ey, char edirec, char** mirror, int max_size, LinkedList* list)
 {
-	
-	LogFrame(list, array, row, col)
 	
 	int i, k, p;
 	char direct = direction(direc);
@@ -78,5 +76,4 @@ void graph(char** array, int row, int col, int px, int py, char direc, int ex, i
 	
 	}
 }
-
 
