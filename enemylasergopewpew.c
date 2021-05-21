@@ -6,7 +6,7 @@ char direction(char direction); /*calling direction to check direction*/
 void newSleep(float sec);
 
 /*the main function that help enemy shoot lazer*/
-int enemyshoot(char** array, int row, int col, int px, int py, char direc, int ex, int ey, char edirec, char elaserdirec, char** mirror, int max_size, LinkedList* list) 
+int enemyshoot(char** array, int row, int col, int px, int py, char direc, int ex, int ey, char edirec, char elaserdirec, int max_size, LinkedList* list) 
 {
 
 	int elazerx = ex;
